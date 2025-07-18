@@ -54,8 +54,13 @@ export async function POST(req: NextRequest) {
       message: "PDF traducido con éxito",
       translatedUrl: `/uploads/${translatedFileName}`,
     });
-  } catch (err: any) {
-  console.error("❌ Error en traducción:", err.message);
-  return NextResponse.json({ error: "Error al traducir el PDF", details: err.message }, { status: 500 });
-}
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("❌ Error en traducción:", err.message);
+      return NextResponse.json({ error: "Error al traducir el PDF", details: err.message }, { status: 500 });
+    }
+
+    console.error("❌ Error en traducción:", err);
+    return NextResponse.json({ error: "Error desconocido al traducir el PDF" }, { status: 500 });
+  }
 }
