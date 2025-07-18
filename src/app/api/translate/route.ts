@@ -3,7 +3,6 @@ import fs from "fs/promises";
 import path from "path";
 import pdfParse from "pdf-parse";
 import { PDFDocument, StandardFonts } from "pdf-lib";
-import { default as translate } from "google-translate-open-api";
 import { Translate } from "@google-cloud/translate/build/src/v2"; // API oficial
 
 // Instancia del traductor de Google Cloud
